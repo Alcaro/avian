@@ -321,6 +321,7 @@ static void do_client(const char * fn)
 int main(int argc, char** argv)
 {
 	static const uint8_t key[] = THE_KEY;
+	static_assert(sizeof(key) == 16, "the key must be exactly 16 bytes");
 	AES_init_ctx(&aesctx, key);
 	
 	if (argc >= 2 && !strncmp(argv[1], "--server", strlen("--server")))

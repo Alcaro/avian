@@ -4,6 +4,13 @@ A chat program over DNS
 
 Designed for censorship circumvention, not convenience
 
+## Limitations
+
+- Server installation requires significant technical expertise.
+- Unix-likes only. Tested on Linux and WSL; does not work natively on Windows (PRs welcome).
+- There are no channels, usernames, banhammers, online status, file upload, or any other modern conveniences. Give access to trusted people only.
+- It's slow. You can read 8 bytes and send 4 bytes per roundtrip to the server, no more; this is usually around 16 bytes per second.
+
 ## Installation
 
 - Create the_key.h, containing
@@ -34,3 +41,11 @@ The resulting AAAA response will be xor'd with the query's plaintext, then decry
 The response plaintext consists of a 32 bit actual chat history size, 8 bytes chat data (or 00s if nothing), and 32 bits of 11 11 11 11.
 
 This means receiving a message can only be done at 8 bytes per query (but can be parallelized), and sending is 4 bytes per trip (which can not be parallelized - the server will reject unordered writes).
+
+## What's with the name?
+
+It's named after [another censorship-resistant communication protocol](https://en.wikipedia.org/wiki/IP_over_Avian_Carriers).
+
+## Okay but all of your tools have weird names
+
+All the normal names were taken, boring, or both
