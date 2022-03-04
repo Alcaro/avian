@@ -61,10 +61,12 @@ printdebug("send", ret);
 }
 
 static uint8_t to_send[4];
+static time_t last_msg;
 
 static void make_chat_query(uint8_t* query, int chatlog_fd)
 {
 	time_t t = time(NULL);
+	if (!last_msg) last_msg = t;
 	query[0] = t>>24; query[1]=t>>16; query[2]=t>>8; query[3]=t;
 	
 	if (!to_send[0])
@@ -103,7 +105,12 @@ printdebug("recv", in);
 		write(1, in+4, wr_amt);
 	}
 	else
-		usleep(1000000);
+	{
+		time_t delay = (time(NULL)-last_msg)*1000000.0/60;
+		if (delay < 1000000) delay = 1000000;
+		if (delay > 60000000) delay = 60000000;
+		usleep(delay);
+	}
 }
 
 static bool decode_label_hex(uint8_t * out, const uint8_t * in)
@@ -264,6 +271,9 @@ static void do_server()
 #endif
 		if (retlen != 0)
 			sendto(fd, buf2, retlen, 0, (struct sockaddr*)&src_addr, src_addr_len);
+#if VERBOSE >= 1
+		fflush(stdout);
+#endif
 	}
 }
 

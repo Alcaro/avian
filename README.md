@@ -26,13 +26,11 @@ Designed for censorship circumvention, not convenience
 
 ## Protocol
 
-The avian chat log consists of a single text file. avian does not support multiple channels, usernames, or similar; it is the most primitive chat system possible.
-
 The avian protocol consists of 16 byte messages.
 
 A query consists of a 32 bit counter (Unix timestamp - avian is not designed for operation beyond 2038), 32 bits expected chat history size (avian does not support chat history bigger than four gigabytes), 4 bytes data to append (padded with 00s if nothing to send), and 32 bits of 00 00 00 00 as a checksum. If expected chat history size does not match actual, the data will not be appended.
 
-The counter+histsize value may not be reused, but as long as either is bigger than last time, the other may remain unchanged.
+The counter+histsize field may not be reused, but as long as either is bigger than last time, the other may remain unchanged.
 
 These 16 bytes will be encrypted with AES-128 in ECB mode, hex encoded using the alphabet abcdefghijklmnop, appended with the server name, and queried over DNS.
 
@@ -42,9 +40,15 @@ The response plaintext consists of a 32 bit actual chat history size, 8 bytes ch
 
 This means receiving a message can only be done at 8 bytes per query (but can be parallelized), and sending is 4 bytes per trip (which can not be parallelized - the server will reject unordered writes).
 
+## Logo
+
+[![Eurasian blue tit](https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Eurasian_blue_tit_Lancashire.jpg/320px-Eurasian_blue_tit_Lancashire.jpg)](https://en.wikipedia.org/wiki/File:Eurasian_blue_tit_Lancashire.jpg)
+
+Any other Ukraine-colored bird is also acceptable as logo.
+
 ## What's with the name?
 
-It's named after [another censorship-resistant communication protocol](https://en.wikipedia.org/wiki/IP_over_Avian_Carriers).
+It's named after [another censorship-resistant and inconvenient communication protocol](https://en.wikipedia.org/wiki/IP_over_Avian_Carriers).
 
 ## Okay but all of your tools have weird names
 
