@@ -1,15 +1,21 @@
 # avian
 
-A chat program over DNS
+A chat program over DNS. Designed for censorship circumvention, not convenience.
 
-Designed for censorship circumvention, not convenience
+This program is designed for the case of Russian internet being censored. As of writing, it's not necessary, but things can change at any moment. (It is also likely functional under several other forms of restricted internet.)
+
+## Features
+
+- Communicates with the server using only standard DNS; remains functional even if all normal TCP and UDP traffic is blocked, and if lookups are relayed through any number of caching recursive resolvers
+- Supports UTF-8, and terminal escape codes for formatting
+- that's it. avian is designed to smuggle information into and out of a censored internet; any conveniences, like UTF-8 support, are accidental.
 
 ## Limitations
 
-- Server installation requires significant technical expertise.
+- Server installation requires domain name configuration, which may require significant technical expertise.
 - Unix-likes only. Tested on Linux and WSL; does not work natively on Windows (PRs welcome).
-- There are no channels, usernames, banhammers, online status, file upload, or any other modern conveniences. Give access to trusted people only.
-- It's slow. You can read 8 bytes and send 4 bytes per roundtrip to the server, no more; this is usually around 16 bytes per second.
+- There are no channels, usernames, banhammers, online status, file upload, or any other modern chatting conveniences. You'll have to type your name manually for each message, and give access to trusted people only.
+- It's slow. You can read 8 bytes or send 4 bytes per roundtrip to the server, no more; this is usually around 16 bytes per second.
 
 ## Installation
 
@@ -44,7 +50,7 @@ This means receiving a message can only be done at 8 bytes per query (but can be
 
 [![Eurasian blue tit](https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Eurasian_blue_tit_Lancashire.jpg/320px-Eurasian_blue_tit_Lancashire.jpg)](https://en.wikipedia.org/wiki/File:Eurasian_blue_tit_Lancashire.jpg)
 
-Any other Ukraine-colored bird is also acceptable as logo.
+[Any](https://en.wikipedia.org/wiki/Common_kingfisher) other [Ukraine](https://en.wikipedia.org/wiki/Blue-and-yellow_tanager)-colored [bird](https://en.wikipedia.org/wiki/Blue-and-yellow_macaw) is also acceptable as logo.
 
 ## What's with the name?
 
